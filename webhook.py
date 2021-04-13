@@ -41,20 +41,8 @@ def makeResponse(req):
 
     speech = f"The forecast for {city} in {date} is {condition}"
 
-    return {
-        "payload": {
-            "google": {
-                "expectUserResponse": True,
-                "richResponse": {
-                    "items": [ {
-                        "simpleResponse": {
-                            "textToSpeech": speech
-                        }
-                    } ]
-                }
-            }
-        }
-    }
+    return {'fulfillmentText': speech}
+
 
 
 if __name__ == '__main__':
