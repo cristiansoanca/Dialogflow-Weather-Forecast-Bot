@@ -21,12 +21,11 @@ def webhook():
 
 
 def makeResponse(req):
- #   result = req.get('result')
- #   parameters = result.get('parameters')
- #   city = parameters.get('geo-city')
- #   date = parameters.get('date-time')
-    city = "London"
-    date = "2021-04-14"
+    result = req.get('result')
+    parameters = result.get('parameters')
+    city = parameters.get('geo-city')
+    date = parameters.get('date-time')
+
     # Weather API
     r = requests.get(f"https://api.openweathermap.org/data/2.5/forecast?q={city}&appid=2cbe6a057de3aadd1d2353cf765a1895")
     json_object = r.json()
