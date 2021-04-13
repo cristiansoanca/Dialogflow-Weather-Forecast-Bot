@@ -12,16 +12,8 @@ from flask import jsonify
 app = Flask(__name__)
 
 
-@app.route('/webhook', methods=['GET', 'POST'])
-def webhook():
-    req = request.get_json(silent=True, force=True)
-    print(json.dumps(req, indent=4))
-
-    return jsonify(makeResponse(req))
-
-
-def makeResponse(req):
-    result = req.get('queryResult')
+def makeResponse(dialogflow_data):
+    result = dialogflow_data.get('queryResult')
     parameters = result.get('parameters')
     city = parameters.get('geo-city')
     date = parameters.get('date-time').split('T')[0]
@@ -40,8 +32,14 @@ def makeResponse(req):
     return {'fulfillmentText': speech}
 
 
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    dialogflow_data = request.get_json(silent=True)
+    return jsonify(makeResponse(dialogflow_data))
+
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     print("Starting app on port %d" % port)
     app.run(debug=False, port=port, host='0.0.0.0')
+
