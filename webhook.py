@@ -24,7 +24,7 @@ def makeResponse(req):
     result = req.get('queryResult')
     parameters = result.get('parameters')
     city = parameters.get('geo-city')
-    date = parameters.get('date-time')
+    date = parameters.get('date-time').split('T')[0]
 
     # Weather API
     r = requests.get(f"https://api.openweathermap.org/data/2.5/forecast?q={city}&appid=2cbe6a057de3aadd1d2353cf765a1895")
