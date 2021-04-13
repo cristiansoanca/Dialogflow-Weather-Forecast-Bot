@@ -5,31 +5,28 @@ import requests
 from flask import Flask
 from flask import request
 from flask import make_response
+from flask import jsonify
 
 
 # Flask app should start in global layout
 app = Flask(__name__)
 
 
-@app.route('/webhook', methods=['POST'])
+@app.route('/webhook', methods=['GET', 'POST'])
 def webhook():
     req = request.get_json(silent=True, force=True)
     print(json.dumps(req, indent=4))
 
-    res = makeResponse(req)
-    res = json.dumps(res, indent=4)
-    r = make_response(res)
-    r.headers['Content-Type'] = 'application/json'
-    
-    return r
+    return jsonify(makeResponse(req))
 
 
 def makeResponse(req):
-    result = req.get('result')
-    parameters = result.get('parameters')
-    city = parameters.get('geo-city')
-    date = parameters.get('date-time')
-
+ #   result = req.get('result')
+ #   parameters = result.get('parameters')
+ #   city = parameters.get('geo-city')
+ #   date = parameters.get('date-time')
+    city = "London"
+    date = "2021-04-14"
     # Weather API
     r = requests.get(f"https://api.openweathermap.org/data/2.5/forecast?q={city}&appid=2cbe6a057de3aadd1d2353cf765a1895")
     json_object = r.json()
