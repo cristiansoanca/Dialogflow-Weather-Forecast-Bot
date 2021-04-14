@@ -27,7 +27,7 @@ def makeResponse(dialogflow_data):
             condition = weather[i]['weather'][0]['description']
             break
 
-    speech = f"The forecast for {city} in {date} is {condition}"
+    speech = f"The forecast for {city} on {date} is {condition}"
 
     return {'fulfillmentText': speech}
 
