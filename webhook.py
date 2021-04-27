@@ -32,13 +32,13 @@ def makeResponse(dialogflow_data):
  
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    dialogflow_data = request.get_json(silent=True)
-    return jsonify(makeResponse(dialogflow_data))
+    #dialogflow_data = request.get_json(silent=True)
+    #return jsonify(makeResponse(dialogflow_data))
 
 @app.route('/', methods=['GET'])
 def hello():
     return 'hello world!'
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=443)
 
