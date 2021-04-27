@@ -1,5 +1,3 @@
-#!/tmp/8d9097b77c05dcf/antenv3.6/bin/python3
-
 import json
 import os
 import requests
@@ -40,8 +38,11 @@ def webhook():
     return jsonify(makeResponse(dialogflow_data))
 
 
+@app.route("/")
+def hello():
+    return "Hello, World!"
+
+
 if __name__ == '__main__':
-    #port = int(os.getenv('PORT', 5000))
-    #print("Starting app on port %d" % port)
-    app.run(debug=False, port=443, host='0.0.0.0')
+    app.run()
 
