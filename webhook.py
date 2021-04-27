@@ -35,9 +35,12 @@ def webhook():
     return jsonify(makeResponse(dialogflow_data))
 
 
-@app.route("/")
+@app.route("/", methods=['GET'])
 def hello():
     return "Hello, World!"
 
+
+if __name__ == '__main__':
+    app.run()
 
 
