@@ -37,12 +37,12 @@ def extract_ticket_data(dialogflow_data):
     # Get ticket data
     url = "https://auchan.easyvista.com/api/v1/50004/internalqueries"
     querystring = {
-            "queryguid": "51A131C1-5C8D-4CD0-895A-A353F02BB6B4",
-            "filterguid": "8A0535F5-03E8-4175-AEEC-40384D062074",
-            "viewguid": "82970C26-B9DF-4C00-B79C-3BF1AF041AB0",
-            "custom_filter": f"(( SD_REQUEST.RFC_NUMBER = '{ticket_number}'))",
-            "max_rows": "1111"
-        }
+        "queryguid": "5D68FBFB-BA16-4FDD-BCB9-C97A847357B4",
+        "filterguid": "4B87F458-6130-469D-94C3-30026CE08036",
+        "viewguid": "4A38A804-A2CE-4ACF-AB4C-02DBEF13F79B",
+        "custom_filter": f"(( SD_REQUEST.RFC_NUMBER = '{ticket_number}'))",
+        "max_rows": "1111"
+    }
     payload = ""
     headers = {
         'Authorization': "Basic bW9td2ViOmF1Y2hhbg==",
@@ -60,7 +60,7 @@ def extract_ticket_data(dialogflow_data):
     except requests.exceptions.RequestException as e:
         raise SystemExit(e)
 
-    r = response.json()['records']
+    r = '\n'.join([item for item in response.json().get('records')[0]])
 
     return {'fulfillmentText': r}
 
