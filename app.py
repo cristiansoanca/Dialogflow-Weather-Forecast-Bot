@@ -68,8 +68,8 @@ def extract_ticket_data(dialogflow_data):
 @app.route('/webhook', methods=['POST'])
 def webhook():
     dialogflow_data = request.get_json(silent=True)
-    if "weather" in dialogflow_data.get("queryText") or \
-        "forecast" in dialogflow_data.get("queryText"):
+    if "weather" in dialogflow_data.get('queryResult').get("queryText") or \
+       "forecast" in dialogflow_data.get("queryResult").get("queryText"):
             return jsonify(makeResponse(dialogflow_data))
     else:
             return jsonify(extract_ticket_data(dialogflow_data))
