@@ -1,10 +1,7 @@
-import json
-import os
 import requests
 
 from flask import Flask
 from flask import request
-from flask import make_response
 from flask import jsonify
 
 
@@ -43,6 +40,4 @@ def hello():
     return "Hello, World!"
 
 
-if __name__ == '__main__':
-    app.run()
 
