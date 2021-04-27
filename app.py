@@ -60,7 +60,7 @@ def extract_ticket_data(dialogflow_data):
     except requests.exceptions.RequestException as e:
         raise SystemExit(e)
 
-    r = '<br\>'.join([f"{key}: {value}" for key, value in response.json().get('records')[0].items()])
+    r = '\n'.join([f"{key}: {value}" for key, value in response.json().get('records')[0].items()])
 
     return {'fulfillmentText': r}
 
