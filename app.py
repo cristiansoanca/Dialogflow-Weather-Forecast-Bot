@@ -68,15 +68,16 @@ def extract_ticket_data(dialogflow_data):
 @app.route('/webhook', methods=['POST'])
 def webhook():
     dialogflow_data = request.get_json(silent=True)
-    ticket_regex = re.compile('ticket |sr |service request|incident ', re.IGNORECASE)
-    incident_regex = re.compile('[I|S|R|P]\d+_\d+')
-    
+    ticket_regex = re.compile('ticket |sr |service request|incident |info ', re.IGNORECASE)
+    incident_regex = re.compile('[I|S|R|P]+\d+_\d+')
+
     if "weather" in dialogflow_data.get('queryResult').get("queryText") or \
        "forecast" in dialogflow_data.get("queryResult").get("queryText"):
             return jsonify(makeResponse(dialogflow_data))
     elif ticket_regex.match(dialogflow_data.get('queryResult').get("queryText")) or \
          incident_regex.search(dialogflow_data.get('queryResult').get("queryText")):
             return jsonify(extract_ticket_data(dialogflow_data))
+    
 
 
 @app.route('/', methods=['GET'])
